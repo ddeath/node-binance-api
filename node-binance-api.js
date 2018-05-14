@@ -1048,12 +1048,12 @@ module.exports = function() {
         /**
         * Cancels an order
         * @param {string} symbol - the symbol to cancel
-        * @param {string} orderid - the orderid to cancel
+        * @param {string} orderIds - the {orderId: 'xxx'} or {origClientOrderId: 'xxx'} to cancel
         * @param {function} callback - the callback function
         * @return {undefined}
         */
-        cancel: function(symbol, orderid, callback = false) {
-            signedRequest(base+'v3/order', {symbol:symbol, orderId:orderid}, function(error, data) {
+        cancel: function(symbol, orderIds, callback = false) {
+            signedRequest(base+'v3/order', {symbol:symbol, ...orderIds}, function(error, data) {
                 if ( callback ) return callback.call(this, error, data, symbol);
             }, 'DELETE');
         },
